@@ -77,9 +77,14 @@ export default function LibraryPage() {
             <header className="sticky top-0 z-50 backdrop-blur-lg border-b border-white/10 bg-[rgba(5,5,16,0.8)]">
                 <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
                     <div className="flex items-center gap-4">
-                        <h1 className="text-2xl font-bold font-[family-name:var(--font-orbitron)] tracking-widest text-white">
-                            MY <span className="text-[var(--neon-cyan)]">LIBRARY</span>
-                        </h1>
+                        <button onClick={() => router.push('/')} className="hover:opacity-80 transition-opacity">
+                            <h1 className="text-2xl font-bold font-[family-name:var(--font-orbitron)] tracking-widest text-white">
+                                MY <span className="text-[var(--neon-cyan)]">LIBRARY</span>
+                            </h1>
+                        </button>
+                        <button onClick={() => router.push('/')} className="text-xs font-mono text-gray-500 hover:text-white transition-colors border-l border-white/20 pl-4">
+                            &larr; HOME
+                        </button>
                     </div>
                     <div>
                         <div className="flex items-center gap-2 font-mono text-xs text-gray-400 bg-black/30 px-3 py-1 rounded-full border border-white/10">

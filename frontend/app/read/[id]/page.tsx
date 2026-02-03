@@ -68,37 +68,38 @@ export default function ReaderPage() {
             {/* Top Bar (Controls) */}
             <div className={`absolute top-0 left-0 right-0 z-50 transition-transform duration-300 ${showControls ? 'translate-y-0' : '-translate-y-full'}`}>
                 <div className={`flex justify-between items-center p-4 backdrop-blur-md shadow-lg ${theme === 'dark' ? 'bg-black/80' : 'bg-white/80'}`}>
-                    <button onClick={() => router.push('/library')} className="font-mono text-sm hover:opacity-70">
-                        &larr; LIBRARY
+                    <button onClick={() => router.push('/library')} className="font-mono text-sm hover:opacity-70 flex items-center gap-2">
+                        <span>&larr;</span> <span className="hidden sm:inline">LIBRARY</span>
                     </button>
-                    <div className="font-[family-name:var(--font-orbitron)] font-bold text-sm tracking-widest opacity-80">
+                    <div className="font-[family-name:var(--font-orbitron)] font-bold text-sm tracking-widest opacity-80 truncate max-w-[150px] sm:max-w-none">
                         BOOK #{id}
                     </div>
 
                     {/* Settings Toggles */}
                     <div className="flex gap-4">
                         <div className="flex items-center gap-2 bg-white/10 rounded-full px-3 py-1">
-                            <button onClick={() => setFontSize(Math.max(50, fontSize - 10))} className="text-sm font-bold px-2">A-</button>
+                            <button onClick={() => setFontSize(Math.max(50, fontSize - 10))} className="text-sm font-bold px-2 hover:text-[var(--neon-cyan)]">A-</button>
                             <span className="text-xs font-mono w-8 text-center">{fontSize}%</span>
-                            <button onClick={() => setFontSize(Math.min(200, fontSize + 10))} className="text-lg font-bold px-2">A+</button>
+                            <button onClick={() => setFontSize(Math.min(200, fontSize + 10))} className="text-lg font-bold px-2 hover:text-[var(--neon-cyan)]">A+</button>
                         </div>
-                        <div className="flex gap-1 bg-white/10 rounded-full p-1">
-                            <button onClick={() => setTheme('light')} className={`w-6 h-6 rounded-full bg-white border border-gray-300 ${theme === 'light' ? 'ring-2 ring-[var(--neon-cyan)]' : ''}`}></button>
-                            <button onClick={() => setTheme('sepia')} className={`w-6 h-6 rounded-full bg-[#f1e8d0] border border-gray-400 ${theme === 'sepia' ? 'ring-2 ring-[var(--neon-cyan)]' : ''}`}></button>
-                            <button onClick={() => setTheme('dark')} className={`w-6 h-6 rounded-full bg-[#1a1a1a] border border-gray-600 ${theme === 'dark' ? 'ring-2 ring-[var(--neon-cyan)]' : ''}`}></button>
+                        <div className="hidden sm:flex gap-1 bg-white/10 rounded-full p-1">
+                            <button onClick={() => setTheme('light')} className={`w-6 h-6 rounded-full bg-white border border-gray-300 ${theme === 'light' ? 'ring-2 ring-[var(--neon-cyan)]' : ''}`} title="Light Mode"></button>
+                            <button onClick={() => setTheme('sepia')} className={`w-6 h-6 rounded-full bg-[#f1e8d0] border border-gray-400 ${theme === 'sepia' ? 'ring-2 ring-[var(--neon-cyan)]' : ''}`} title="Sepia Mode"></button>
+                            <button onClick={() => setTheme('dark')} className={`w-6 h-6 rounded-full bg-[#1a1a1a] border border-gray-600 ${theme === 'dark' ? 'ring-2 ring-[var(--neon-cyan)]' : ''}`} title="Dark Mode"></button>
                         </div>
                     </div>
                 </div>
             </div>
 
             {/* Main Reader Area */}
-            <div className="flex-1 relative z-0 mt-0">
+            <div className="flex-1 relative z-0 mt-0 h-full">
                 {!epubData ? (
-                    <div className="flex h-full items-center justify-center">
+                    <div className="flex h-full items-center justify-center flex-col gap-4">
                         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[var(--neon-cyan)]"></div>
+                        <p className="font-mono text-sm opacity-50 animate-pulse">Decrypting content...</p>
                     </div>
                 ) : (
-                    <div style={{ height: '100vh' }}>
+                    <div style={{ height: '100%' }}>
                         <ReactReader
                             url={epubData}
                             location={location}
@@ -124,16 +125,27 @@ export default function ReaderPage() {
 
             {/* Tap Zones for Controls Toggle */}
             <div
-                className="absolute inset-x-0 top-[20%] bottom-[20%] z-40 cursor-pointer"
+                className="absolute inset-x-0 top-[60px] bottom-[40px] z-40 cursor-default"
                 onClick={() => setShowControls(!showControls)}
                 title="Toggle Menu"
-            ></div>
+            >
+                {/* Center Zone only, side zones should strictly correspond to next/prev in ReactReader but this overlay might block them if not sized right. 
+                    Actually ReactReader handles clicks. We just want a way to toggle menu. 
+                    Let's make this overlay transparent and non-blocking for events except maybe a custom header/footer tap area? 
+                    Better: Just let ReactReader handle clicks, but ReactReader consumes clicks.
+                    We will simulate specific zones or just use the Header/Footer proximity.
+                */}
+            </div>
+            {/* Note: ReactReader usually swallows clicks. We use a transparent overlay for custom behavior if needed, 
+               but here we rely on the header/footer being accessible when shown. 
+               The 'Top Bar' is z-50 so it catches clicks. 
+            */}
 
             {/* Bottom Bar (Progress) */}
             <div className={`absolute bottom-0 left-0 right-0 z-50 transition-transform duration-300 ${showControls ? 'translate-y-0' : 'translate-y-full'}`}>
-                <div className={`p-4 backdrop-blur-md text-center font-mono text-xs ${theme === 'dark' ? 'bg-black/80 text-gray-400' : 'bg-white/80 text-gray-600'}`}>
-                    {/* Simplified Progress (Normally calc from location) */}
-                    Location: {String(location).slice(0, 10)}... | {fontSize}% Zoom
+                <div className={`p-4 backdrop-blur-md text-center font-mono text-xs ${theme === 'dark' ? 'bg-black/80 text-gray-400' : 'bg-white/80 text-gray-600'} flex justify-between px-8`}>
+                    <span>{String(location).slice(0, 10)}...</span>
+                    <span>{fontSize}% Zoom</span>
                 </div>
             </div>
 

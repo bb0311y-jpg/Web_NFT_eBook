@@ -103,7 +103,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center gap-4">
             <h1 className="text-2xl font-bold font-[family-name:var(--font-orbitron)] tracking-widest text-[var(--neon-cyan)] drop-shadow-[0_0_10px_rgba(0,243,255,0.5)]">
-              {t.nav_title} <span className="text-[0.6em] align-top opacity-70">V1.5</span>
+              {t.nav_title} <span className="text-[0.6em] align-top opacity-70">V1.6</span>
             </h1>
             <LanguageSwitcher />
           </div>

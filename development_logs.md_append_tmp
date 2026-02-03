@@ -1,10 +1,10 @@
 
-## 2026-02-04 文件更新 (Documentation Update)
-- **遇到的問題**：使用者需請技術友人協助審查專案設定 (Blockchain/Contract)，請求更新文件。
+## 2026-02-04 介面優化 (UI Improvement)
+- **遇到的問題**：使用者反饋找不到會員登入入口，首頁只有連接錢包按鈕。
 - **嘗試歷程**：
-    - 盤點 `contracts_project` 下的合約設定與 Hardhat Config。
-    - 盤點 `frontend` 下的加密與驗證邏輯。
+    - 檢查 `page.tsx` Header 區域。
+    - 發現只放置了 `ConnectButton`，缺少導向 `/profile` 的入口。
 - **分析與修復**：
-    - 更新 `PROJECT_STATE.md`，新增「技術架構與參數 (Technical Specifications)」章節。
-    - 詳細列出：Polygon Amoy, ERC-1155, USDT, AES-256 等關鍵技術選型。
-- **成果**：文件已包含完整的技術規格，可直接提供給第三方開發者進行 Code Review。
+    - 在 Header 新增 "MEMBER LOGIN" 按鈕。
+    - 點擊後直接跳轉至 Member Center，讓無錢包使用者能直觀找到測試入口。
+- **成果**：首頁右上角現在有清晰的會員登入選項。

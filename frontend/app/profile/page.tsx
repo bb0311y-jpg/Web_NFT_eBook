@@ -93,10 +93,16 @@ export default function ProfilePage() {
                                 <div>
                                     <h2 className="text-3xl font-[family-name:var(--font-orbitron)] text-white mb-2">{userEmail?.split('@')[0]}</h2>
                                     <p className="text-gray-400 font-mono text-sm">{userEmail}</p>
-                                    <div className="mt-4 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--neon-purple)]/20 border border-[var(--neon-purple)]/50 text-[var(--neon-purple)] text-xs font-mono">
-                                        <span>★ PREMIUM MEMBER</span>
+                                    <div className="mt-4 flex gap-3">
+                                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--neon-purple)]/20 border border-[var(--neon-purple)]/50 text-[var(--neon-purple)] text-xs font-mono">
+                                            <span>★ PREMIUM MEMBER</span>
+                                        </div>
+                                        {/* Mock Edit Profile */}
+                                        <button onClick={() => alert("Edit Profile Feature Coming Soon")} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-gray-300 text-xs font-mono hover:bg-white/20 transition-colors">
+                                            <span>✎ EDIT PROFILE</span>
+                                        </button>
                                     </div>
-                                    <button onClick={logout} className="ml-4 text-xs text-red-400 hover:text-red-300 underline">LOGOUT</button>
+                                    <button onClick={logout} className="mt-4 text-xs text-red-400 hover:text-red-300 underline block">LOGOUT</button>
                                 </div>
                                 <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[var(--neon-cyan)] to-[var(--neon-purple)] flex items-center justify-center text-2xl font-bold text-black border-2 border-white">
                                     {userEmail?.[0].toUpperCase()}
@@ -104,6 +110,43 @@ export default function ProfilePage() {
                             </div>
                             {/* Decoration */}
                             <div className="absolute -right-10 -top-10 w-64 h-64 bg-[var(--neon-purple)]/20 blur-[100px] rounded-full pointer-events-none"></div>
+                        </div>
+
+                        {/* NEW: MY INVENTORY (v1.6) */}
+                        <div className="p-6 border border-gray-700 bg-black/40 rounded-xl">
+                            <h3 className="text-lg font-[family-name:var(--font-orbitron)] mb-6 flex items-center gap-2 text-[var(--neon-cyan)]">
+                                <span>📚</span> MY INVENTORY
+                            </h3>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {/* Mock Book Item 1 */}
+                                <div className="flex items-center gap-4 bg-white/5 p-4 rounded-lg border border-white/10 hover:border-[var(--neon-cyan)]/50 transition-colors cursor-pointer" onClick={() => router.push('/read/1')}>
+                                    <div className="w-12 h-16 bg-gray-700 rounded flex items-center justify-center text-xs text-gray-400 font-mono">
+                                        COVER
+                                    </div>
+                                    <div className="flex-1">
+                                        <h4 className="font-bold text-white text-sm font-[family-name:var(--font-orbitron)]">The Future of Web3</h4>
+                                        <p className="text-xs text-gray-400 font-mono">ID: #1 | Tier: Early Bird</p>
+                                    </div>
+                                    <div className="bg-[var(--neon-cyan)]/20 text-[var(--neon-cyan)] px-3 py-1 rounded font-mono text-xs font-bold">
+                                        x1
+                                    </div>
+                                </div>
+
+                                {/* Mock Book Item 2 */}
+                                <div className="flex items-center gap-4 bg-white/5 p-4 rounded-lg border border-white/10 hover:border-[var(--neon-cyan)]/50 transition-colors cursor-pointer" onClick={() => router.push('/read/4')}>
+                                    <div className="w-12 h-16 bg-gray-700 rounded flex items-center justify-center text-xs text-gray-400 font-mono">
+                                        COVER
+                                    </div>
+                                    <div className="flex-1">
+                                        <h4 className="font-bold text-white text-sm font-[family-name:var(--font-orbitron)]">DeFi for Dummies</h4>
+                                        <p className="text-xs text-gray-400 font-mono">ID: #4 | Tier: Standard</p>
+                                    </div>
+                                    <div className="bg-[var(--neon-cyan)]/20 text-[var(--neon-cyan)] px-3 py-1 rounded font-mono text-xs font-bold">
+                                        x2
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         {/* WALLET MANAGEMENT (The "Hybrid" Part) */}
