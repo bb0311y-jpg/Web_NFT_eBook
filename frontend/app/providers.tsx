@@ -41,6 +41,7 @@ const config = getDefaultConfig({
 const queryClient = new QueryClient();
 
 import { LanguageProvider } from '@/context/LanguageContext';
+import { AuthProvider } from '@/context/AuthContext';
 
 export function Providers({ children }: { children: React.ReactNode }) {
     return (
@@ -48,7 +49,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
             <QueryClientProvider client={queryClient}>
                 <RainbowKitProvider theme={darkTheme()}>
                     <LanguageProvider>
-                        {children}
+                        <AuthProvider>
+                            {children}
+                        </AuthProvider>
                     </LanguageProvider>
                 </RainbowKitProvider>
             </QueryClientProvider>

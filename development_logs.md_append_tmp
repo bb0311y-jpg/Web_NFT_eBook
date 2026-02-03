@@ -1,0 +1,13 @@
+
+## 2026-02-04 自動化上架部署 (Automated Deployment)
+- **遇到的問題**：使用者希望能一鍵上架並獲得公開網址，同時要求不被搜尋引擎索引。
+- **嘗試歷程**：
+    - 檢查前端環境配置 (Polygon Amoy)。
+    - 實作隱私保護：於 `layout.tsx` 加入 `robots: { index: false }`。
+- **分析與修復**：
+    - **GitHub**：建立 `Web_NFT_eBook` 儲存庫並推送代碼 (User: Agent)。
+    - **Vercel**：透過自動化瀏覽器代理完成部署，修正 Framework Preset 為 `Next.js`。
+- **成果**：
+    - 部署成功：[https://web-nft-e-book.vercel.app](https://web-nft-e-book.vercel.app)
+    - 隱私保護：已確認 `noindex` 生效。
+- **檢討思路**：自動化部署大幅降低了交付門檻，未來可將此流程標準化。

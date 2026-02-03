@@ -6,9 +6,11 @@ import { NFTCard } from '@/components/NFTCard';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useRouter } from 'next/navigation';
 import { useLanguage } from '@/context/LanguageContext';
+import { useAuth } from '@/context/AuthContext';
 
 export default function LibraryPage() {
     const { isConnected, address } = useAccount();
+    const { isLoggedIn, userEmail } = useAuth(); // Global Auth
     const router = useRouter();
     const { t } = useLanguage();
     const [filter, setFilter] = useState<'all' | 'unread' | 'finished'>('all');
@@ -35,7 +37,8 @@ export default function LibraryPage() {
         router.push('/profile');
     };
 
-    if (!isConnected) {
+    // ALLOW ACCESS IF: Wallet Connected OR Email Logged In
+    if (!isConnected && !isLoggedIn) {
         return (
             <div className="min-h-screen flex flex-col items-center justify-center bg-[var(--background)] text-white p-6">
                 <div className="text-center space-y-6 max-w-md p-8 border border-white/10 rounded-2xl bg-white/5 backdrop-blur-lg">
@@ -81,7 +84,11 @@ export default function LibraryPage() {
                     <div>
                         <div className="flex items-center gap-2 font-mono text-xs text-gray-400 bg-black/30 px-3 py-1 rounded-full border border-white/10">
                             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                            {address?.slice(0, 6)}...{address?.slice(-4)}
+                            {/* Show Wallet Address OR Email */}
+                            {isConnected
+                                ? `${address?.slice(0, 6)}...${address?.slice(-4)}`
+                                : userEmail
+                            }
                         </div>
                     </div>
                 </div>

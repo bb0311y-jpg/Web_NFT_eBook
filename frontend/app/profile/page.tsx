@@ -5,12 +5,16 @@ import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useRouter } from 'next/navigation';
 
+import { useAuth } from '@/context/AuthContext';
+
 export default function ProfilePage() {
     const { isConnected, address } = useAccount();
     const router = useRouter();
 
-    // Mock User State
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    // Global Mock Auth State
+    const { isLoggedIn, userEmail, login, logout } = useAuth();
+
+    // Local form state
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -23,7 +27,7 @@ export default function ProfilePage() {
     const handleLogin = (e: React.FormEvent) => {
         e.preventDefault();
         if (email && password) {
-            setIsLoggedIn(true);
+            login(email);
         }
     };
 
@@ -87,14 +91,15 @@ export default function ProfilePage() {
                         <div className="p-8 border border-[var(--glass-border)] bg-[var(--glass-bg)] rounded-2xl relative overflow-hidden group">
                             <div className="relative z-10 flex items-start justify-between">
                                 <div>
-                                    <h2 className="text-3xl font-[family-name:var(--font-orbitron)] text-white mb-2">{email.split('@')[0]}</h2>
-                                    <p className="text-gray-400 font-mono text-sm">{email}</p>
+                                    <h2 className="text-3xl font-[family-name:var(--font-orbitron)] text-white mb-2">{userEmail?.split('@')[0]}</h2>
+                                    <p className="text-gray-400 font-mono text-sm">{userEmail}</p>
                                     <div className="mt-4 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--neon-purple)]/20 border border-[var(--neon-purple)]/50 text-[var(--neon-purple)] text-xs font-mono">
                                         <span>★ PREMIUM MEMBER</span>
                                     </div>
+                                    <button onClick={logout} className="ml-4 text-xs text-red-400 hover:text-red-300 underline">LOGOUT</button>
                                 </div>
                                 <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[var(--neon-cyan)] to-[var(--neon-purple)] flex items-center justify-center text-2xl font-bold text-black border-2 border-white">
-                                    {email[0].toUpperCase()}
+                                    {userEmail?.[0].toUpperCase()}
                                 </div>
                             </div>
                             {/* Decoration */}
