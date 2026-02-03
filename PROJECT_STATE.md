@@ -1,15 +1,16 @@
 # 專案狀態 (Project State)
 
 ## 當前進度
-- **階段**：Phase 1.5 - 上架部署 (Deployed).
-- **狀態**：**已上架 (Live)** - [瀏覽網站](https://web-nft-e-book.vercel.app)
+- **階段**：Phase 1.6 - 優化使用者體驗 (UX Enhancement).
+- **狀態**：**已上架 (Live)** - [瀏覽網站 v1.6](https://web-nft-e-book.vercel.app)
 
 ## 已完成項目
 - **智能合約 (Backend Asset)**：ERC-1155, USDT Payment. (Verified)
 - **加密工具 (Backend Lock)**：AES-256 Encryption. (Verified)
 - **前端網站 (Frontend Viewer)**：
-    - **首頁**：連接錢包與模擬購買。
-    - **閱讀器**：Token-Gated Access，後端驗證簽名並回傳解密內容。
+    - **首頁**：v1.6 更新，新增 Member Login 入口。
+    - **閱讀器**：優化介面，新增字體調整、主題切換、返回書櫃功能。
+    - **會員中心**：整合 Web3 錢包連結與 System Wallet，顯示持有藏書(Inventory)。
     - **測試功能**：Demo Mode (Email Login) 供無錢包測試。
 - **部署 (Deployment)**：
     - **Vercel**: `https://web-nft-e-book.vercel.app` (NoIndex Protected).

@@ -1,10 +1,12 @@
 
-## 2026-02-04 介面優化 (UI Improvement)
-- **遇到的問題**：使用者反饋找不到會員登入入口，首頁只有連接錢包按鈕。
+## 2026-02-04 v1.6 重大更新 (Navigation & Member Experience)
+- **遇到的問題**：使用者反饋功能缺漏 (無法返回首頁、會員中心功能陽春、閱讀器介面需優化)。
 - **嘗試歷程**：
-    - 檢查 `page.tsx` Header 區域。
-    - 發現只放置了 `ConnectButton`，缺少導向 `/profile` 的入口。
+    - 全站搜尋 `router.push` 補齊缺失的導航按鈕 (Home/Library)。
+    - 參考主流 NFT 平台，設計「我的藏書」區塊：顯示數量、封面、權益。
+    - 導入 `react-reader` 的進階設定，自訂字體與控制列。
 - **分析與修復**：
-    - 在 Header 新增 "MEMBER LOGIN" 按鈕。
-    - 點擊後直接跳轉至 Member Center，讓無錢包使用者能直觀找到測試入口。
-- **成果**：首頁右上角現在有清晰的會員登入選項。
+    - **導航 (Navigation)**: 修復 Library Logo 點擊跳轉，新增 Back to Home。
+    - **會員中心 (Member Center)**: 新增 Inventory (Grid View), Edit Profile (Mock)。
+    - **閱讀器 (Reader)**: 浮動式 Menu，新增 "Back to Library"，優化沈浸式體驗。
+- **成果**：版本號推進至 **v1.6**，完成度已接近 Phase 2 預期標準。
