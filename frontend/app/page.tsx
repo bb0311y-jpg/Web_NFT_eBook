@@ -108,6 +108,12 @@ export default function Home() {
             <LanguageSwitcher />
           </div>
           <div className="flex items-center gap-4">
+            <button
+              onClick={() => router.push('/profile')}
+              className="px-4 py-2 text-xs font-mono text-[var(--neon-cyan)] border border-[var(--neon-cyan)]/30 rounded hover:bg-[var(--neon-cyan)]/10 transition-all uppercase tracking-wider"
+            >
+              Member Login
+            </button>
             <span className="hidden md:inline text-xs font-mono text-gray-500">{t.connect_wallet} &rarr;</span>
             <ConnectButton showBalance={false} label={t.btn_connect} />
           </div>
